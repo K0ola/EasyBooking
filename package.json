@@ -25,11 +25,16 @@
     "health": "curl -f http://localhost:3000/api/health || echo 'Server not responding'",
     "test:info": "cat tests/TESTS_OVERVIEW.txt"
   },
-  "keywords": ["test", "jest", "easybooking"],
+  "keywords": [
+    "test",
+    "jest",
+    "easybooking"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "jest": "^29.7.0",
+    "jest-junit": "^16.0.0",
     "jsonwebtoken": "^9.0.3"
   },
   "dependencies": {
