@@ -1,0 +1,51 @@
+name: Tests Fonctionnels
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+  workflow_dispatch:
+
+jobs:
+  functional-tests:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Start server in background
+      run: |
+        npm run dev &
+        sleep 10
+      env:
+        NODE_ENV: test
+        JWT_SECRET: ${{ secrets.JWT_SECRET || 'test-secret-key-for-github-actions' }}
+
+    - name: Wait for server to be ready
+      run: |
+        timeout 30 bash -c 'until curl -f http://localhost:3000/api/health; do sleep 2; done' || exit 1
+
+    - name: Run functional tests
+      run: npm run test:fonctionnel
+
+    - name: Upload test results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: functional-test-results-node-${{ matrix.node-version }}
+        path: coverage/
