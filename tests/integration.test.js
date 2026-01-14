@@ -61,7 +61,7 @@ describe('TESTS D\'INTEGRATION API', () => {
 
     const loginRes = await makeRequest('POST', '/api/auth/login', {
       email: integEmail,
-      password: 'IntegTest123!'
+      password: 'IntegTest123!!'
     });
 
     if (loginRes.status === 200) {
