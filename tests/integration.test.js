@@ -55,7 +55,7 @@ describe('TESTS D\'INTEGRATION API', () => {
   beforeAll(async () => {
     await makeRequest('POST', '/api/auth/register', {
       email: integEmail,
-      password: 'IntegTest123!',
+      password: 'IntegTest123!!',
       fullName: 'Integration Test User'
     });
 
