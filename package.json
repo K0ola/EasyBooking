@@ -31,5 +31,8 @@
   "devDependencies": {
     "jest": "^29.7.0",
     "jsonwebtoken": "^9.0.3"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3"
   }
 }
