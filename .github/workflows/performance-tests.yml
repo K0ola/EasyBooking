@@ -56,21 +56,10 @@ jobs:
     - name: Run performance tests
       run: npm run test:performance
 
-    - name: Publish Test Results
-      uses: EnricoMi/publish-unit-test-result-action@v2
-      if: always()
-      with:
-        files: |
-          junit.xml
-        check_name: 'Test Results (Performance - Node ${{ matrix.node-version }})'
-        comment_mode: off
-
     - name: Upload test results
       if: always()
       uses: actions/upload-artifact@v4
       with:
         name: performance-test-results-node-${{ matrix.node-version }}
-        path: |
-          coverage/
-          junit.xml
+        path: coverage/
         if-no-files-found: ignore
