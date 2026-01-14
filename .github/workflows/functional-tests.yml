@@ -26,16 +26,25 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
 
-    - name: Install dependencies
+    - name: Install root dependencies
       run: npm ci
+
+    - name: Install server dependencies
+      run: cd server && npm ci
+
+    - name: Create .env file for server
+      run: |
+        cat > server/.env << EOF
+        SUPABASE_URL=${{ secrets.SUPABASE_URL || 'https://bwxjlxlstyjkofdpeyyl.supabase.co' }}
+        SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3eGpseGxzdHlqa29mZHBleXlsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgyMTQzOTMsImV4cCI6MjA4Mzc5MDM5M30.yZgRAs1wuUP73caiKMrl1MkXBuGOPJ3vLB-oH3fQ3n8' }}
+        PORT=3000
+        JWT_SECRET=${{ secrets.JWT_SECRET || 'test-secret-key-for-github-actions' }}
+        EOF
 
     - name: Start server in background
       run: |
-        npm run dev &
+        cd server && node server.js &
         sleep 10
-      env:
-        NODE_ENV: test
-        JWT_SECRET: ${{ secrets.JWT_SECRET || 'test-secret-key-for-github-actions' }}
 
     - name: Wait for server to be ready
       run: |
