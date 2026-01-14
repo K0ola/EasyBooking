@@ -1,0 +1,287 @@
+.time-slot-picker {
+  width: 100%;
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.time-picker-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  gap: 12px;
+}
+
+.time-display-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.time-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 20px;
+  background-color: #f3f4f6;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex: 1;
+  min-width: 0;
+}
+
+.time-display:hover {
+  background-color: #e5e7eb;
+  border-color: #d1d5db;
+}
+
+.time-display.active {
+  background-color: #eff6ff;
+  border-color: #2563eb;
+}
+
+.time-label {
+  font-size: 12px;
+  color: #666;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.time-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: #333;
+  font-variant-numeric: tabular-nums;
+}
+
+.time-display.active .time-value {
+  color: #2563eb;
+}
+
+.time-separator {
+  font-size: 20px;
+  color: #2563eb;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.reset-btn {
+  padding: 8px 12px;
+  background-color: #fee2e2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  color: #dc2626;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.reset-btn:hover {
+  background-color: #fecaca;
+  border-color: #fca5a5;
+}
+
+.time-selection-hint {
+  text-align: center;
+  font-size: 14px;
+  color: #2563eb;
+  font-weight: 500;
+  margin-bottom: 16px;
+  padding: 8px;
+  background-color: #eff6ff;
+  border-radius: 6px;
+}
+
+.time-slots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 8px;
+  margin-bottom: 16px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 4px;
+}
+
+.time-slots-grid::-webkit-scrollbar {
+  width: 8px;
+}
+
+.time-slots-grid::-webkit-scrollbar-track {
+  background: #f3f4f6;
+  border-radius: 4px;
+}
+
+.time-slots-grid::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+
+.time-slots-grid::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+.time-slot {
+  padding: 12px 8px;
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  transition: all 0.2s;
+  font-variant-numeric: tabular-nums;
+}
+
+.time-slot:hover:not(.disabled) {
+  background-color: #eff6ff;
+  border-color: #2563eb;
+  color: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(37, 99, 235, 0.1);
+}
+
+.time-slot.selected {
+  background-color: #2563eb;
+  border-color: #2563eb;
+  color: white;
+  font-weight: 700;
+}
+
+.time-slot.selected:hover {
+  background-color: #1d4ed8;
+  border-color: #1d4ed8;
+}
+
+.time-slot.in-range {
+  background-color: #dbeafe;
+  border-color: #93c5fd;
+  color: #1e40af;
+}
+
+.time-slot.booked {
+  background-color: #fee2e2 !important;
+  border-color: #fca5a5 !important;
+  color: #991b1b !important;
+  position: relative;
+  cursor: not-allowed;
+  opacity: 1 !important;
+}
+
+.time-slot.booked:hover {
+  transform: none;
+  box-shadow: none;
+  background-color: #fecaca !important;
+}
+
+.time-slot.disabled {
+  background-color: #fafafa;
+  border-color: #f3f4f6;
+  color: #d1d5db;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.time-slot.disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.booked-mark {
+  position: absolute;
+  top: 2px;
+  right: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.time-picker-footer {
+  padding-top: 12px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.time-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #666;
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 2px solid;
+}
+
+.legend-color.selected {
+  background-color: #2563eb;
+  border-color: #2563eb;
+}
+
+.legend-color.in-range {
+  background-color: #dbeafe;
+  border-color: #93c5fd;
+}
+
+.legend-color.booked {
+  background-color: #fee2e2;
+  border-color: #fca5a5;
+}
+
+@media (max-width: 640px) {
+  .time-slot-picker {
+    padding: 16px;
+  }
+
+  .time-display {
+    padding: 10px 12px;
+  }
+
+  .time-label {
+    font-size: 11px;
+  }
+
+  .time-value {
+    font-size: 16px;
+  }
+
+  .time-separator {
+    font-size: 16px;
+  }
+
+  .time-selection-hint {
+    font-size: 13px;
+  }
+
+  .time-slots-grid {
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    gap: 6px;
+    max-height: 250px;
+  }
+
+  .time-slot {
+    padding: 10px 6px;
+    font-size: 13px;
+  }
+
+  .legend-item {
+    font-size: 11px;
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "name": "easybooking-tests",
+  "version": "1.0.0",
+  "description": "Tests pour l'application EasyBooking",
+  "scripts": {
+    "test": "jest --runInBand",
+    "test:all": "npm run test:unit && npm run test:integration && npm run test:fonctionnel && npm run test:performance",
+    "test:unit": "jest tests/unit.test.js --verbose",
+    "test:integration": "jest tests/integration.test.js --verbose --runInBand",
+    "test:fonctionnel": "jest tests/fonctionnel.test.js --verbose --runInBand",
+    "test:performance": "jest tests/performance.test.js --verbose --runInBand",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage --runInBand",
+    "test:verbose": "jest --verbose --runInBand",
+    "test:ci": "jest --ci --coverage --maxWorkers=2",
+    "start": "cd server && npm start",
+    "dev": "cd server && npm run dev",
+    "lint": "eslint . --ext .js || echo 'ESLint non configuré'",
+    "docker:build": "docker build -t easybooking:latest .",
+    "docker:run": "docker run -p 3000:3000 easybooking:latest",
+    "docker:compose": "docker-compose up -d",
+    "docker:compose:dev": "docker-compose --profile dev up",
+    "docker:compose:test": "docker-compose --profile test up test",
+    "docker:compose:down": "docker-compose down",
+    "health": "curl -f http://localhost:3000/api/health || echo 'Server not responding'",
+    "test:info": "cat tests/TESTS_OVERVIEW.txt"
+  },
+  "keywords": ["test", "jest", "easybooking"],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jsonwebtoken": "^9.0.3"
+  }
+}
